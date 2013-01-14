@@ -1,0 +1,19 @@
+<head>
+  <div id="hackBar" class="container">
+    <ul class="nav-bar row">
+      <li class="six columns hide-on-tablets nbr"><h2><%= link_to "Hackers R. Us", root_path %></h2></li>
+      <li class="show-on-tablets nbr"><h3><%= link_to "Hackers R. Us", root_path %></h3></li>
+
+      <% if signed_in? %>
+       <li><%= link_to "Profile", current_user %></li>
+       <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+       <li><%= link_to "Nodes", nodes_path %></li>
+       <li class="nbr"><%= link_to "Sign Out", signout_path, :method => :delete %></li>
+      <% else %>
+       <li><%= link_to "Sign In", signin_path %></li>
+       <li class="nbr"><%= link_to "Sign Up", signup_path %></li>
+      <% end %>
+        
+    </ul>
+  </div>
+</head>

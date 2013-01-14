@@ -1,0 +1,26 @@
+<div class="panel">
+<tr>
+  <td class="note">
+    <% unless @user.nil? %>
+        <span class="pre">In <%= link_to Node.find(params[:id] = note.node_id).name, node_path(Node.find(params[:id] = note.node_id).name) %> | </span>
+      <span class="timestamp"><%= time_ago_in_words(note.created_at) %> ago.</span><br />
+    <% end %>
+    <% unless @node.nil? %>
+        <span class="pre">From <%= link_to User.find(params[:id] = note.user_id).handle, user_path(User.find(params[:id] = note.user_id).handle) %> | </span>
+      <span class="timestamp"><%= time_ago_in_words(note.created_at) %> ago.</span><br />
+    <% end %>
+    <strong class="title"><%= note.title %></strong>
+    <% if note.link? %> | <span class="link"><a target="_blank" href="<%= note.link %>"><%= note.link %></a></span><br /><% else %><br /><% end %>
+    <span class="description"><%= note.description %></span>
+  </td>
+</tr>
+<% if signed_in? %>
+  <% if (current_user.id == note.user_id) || (current_user.admin == true) %>
+    <%= link_to 'Destroy', note, :confirm => 'Really?', :method => :delete %>
+    <%= link_to 'Edit', edit_note_path(note) %>
+  <% end %>
+<% end %>
+<br />
+<br />
+<%= note.link_html %>
+</div>

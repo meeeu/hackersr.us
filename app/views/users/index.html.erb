@@ -1,0 +1,33 @@
+<h3>List of Users</h3>
+<p><b>All contact information is for direct communication only.  DO NOT SPAM!</b></p>
+<% flash.each do |key, value| %>
+  <div class="flash <%= key %>"><%= value %></div>
+<% end %>
+
+<table>
+ <thead>  
+  <tr>
+    <th>Handle</th>  
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+ </thead>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.handle %></td>  
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= link_to 'Show', user %></td>
+    <% if current_user.admin? %>
+      <td><%= link_to 'Edit', edit_user_path(user) %></td>
+      <td><%= link_to 'Destroy', user, :method => :delete, :confirm => 'You sure?', :title => "Destroy #{user.name}?" %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />

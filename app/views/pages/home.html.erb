@@ -1,0 +1,65 @@
+<div id="1">
+  
+
+  <p>Below is where we are currently having club meetings.  Sign up now to learn more.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Continent</th>
+        <th>Country</th>
+        <th>State</th>
+        <th>City</th>
+      </tr>
+    </thead>
+
+    <% Node.all.each do |node| %>
+      <tr>
+        <td><%= node.continent %></td>
+        <td><%= node.country %></td>
+        <td><%= node.state %></td>
+        <td><%= node.city %></td>
+      </tr>
+    <% end %>
+  </table>
+
+
+</div>
+
+<div class="row">    
+<div id="2" class="three columns centered" style="display:none">
+<p id="clue">shuar.cskre</p>
+<form action="javascript:so();">
+    <div>
+        <input id="q" type="text" autocomplete="off" />
+    </div>
+</form><span></span></div>
+</div>
+
+<script>
+    so(){
+        return true;}
+
+$('#q').keydown(function(event) {
+    if (event.keyCode == '190') {var newValue = $('#clue').text().replace('.', '')}
+    else {
+    var newValue = $('#clue').text().replace(String.fromCharCode(event.keyCode).replace('.', '').toLowerCase(), '');
+    }
+    $('#clue').text( newValue );});
+    $('body').css({'color':'white','background-color':'black'});
+    
+$('#1').hide();
+
+function so() {$('#2').fadeOut('slow');$('#1').fadeIn('slow');$('body').css({'color':'black','background-color':'white'});}
+
+$('input:submit').hide();
+
+$("form").submit(function() {
+    if ($("#q").val().toLowerCase() == "hackersr.us") {
+        $("span").text("Validated...").show();
+        return true;}                                                                  
+    $('#clue').text('shuar.cskre');                                                     
+    $('#q').val('');                                                                   
+    $("span").text("Hack Harder!  Look at the URL!!!").show().fadeOut(1000);
+    return false;
+});
+</script>

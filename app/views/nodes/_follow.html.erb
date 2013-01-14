@@ -1,0 +1,5 @@
+<%= form_for current_user.relationships.build(:followed_id => @node.id) do |f| %>
+  <div><%= f.hidden_field :followed_id %></div>
+  <div class="actions"><%= f.submit "Join #{@node.name}", :class => "nice small radius black button" %></div>
+<% end %>
+

@@ -1,0 +1,40 @@
+<h3>Active Nodes</h3>
+<div class="row">
+<div class="eight columns">
+<p>The nodes are meant for organizing offline hangouts and gatherings.  Do feel free to use it as forums to get to know fellow hackers in your area.  I will join every new node and attempt to make it out to at least one event per node in person.</p> 
+</div>
+</div>
+<table>
+ <thead>  
+  <tr>
+    <th>Name</th>
+    <th>Continent</th>
+    <th>Country</th>
+    <th>State</th>
+    <th>City</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+ </thead>
+
+<% @nodes.each do |node| %>
+  <tr>  
+    <td><%= link_to node.name, node_path(node) %></td>
+    <td><%= node.continent %></td>
+    <td><%= node.country %></td>
+    <td><%= node.state %></td>
+    <td><%= node.city %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <% if signed_in? %>
+      <% if (current_user.admin == true) %>
+        <td><%= link_to 'Show', node %></td>  
+        <td><%= link_to 'Edit', edit_node_path(node) %></td>
+        <td><%= link_to 'Destroy', node, :confirm => 'Are you sure?', :method => :delete %></td>
+      <% end %>
+    <% end %>
+  </tr>
+<% end %>
+</table>

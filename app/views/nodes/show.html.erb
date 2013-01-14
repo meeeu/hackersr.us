@@ -1,0 +1,32 @@
+<ul class="vcard">
+  <li><b>Node <%= @node.id %>: </b><%= @node.name %></li>
+  <li><b>Location: </b><%= @node.continent %> | <%= @node.country %> | <%= @node.state %> | <%= @node.city %></li>
+  <li><b>Users: </b><% if @node.followers.count == 0 %>none<% else %><%= @node.followers.count %><% end %>
+  <li><p><%= render 'follow_form' if signed_in? %>
+  <% if current_user.following?(@node) %><a href="#" class="nice small radius white button"  data-reveal-id="myModal">Write A Note</a><% end %>
+  </p></li>
+</ul>
+
+<div id="myModal" class="reveal-modal">
+<% if current_user.following?(@node) %>
+  <p><b>Write A Note</b></p>
+<% end %>
+
+<% flash.each do |key, value| %>
+  <div class = "flash <%= key %>"><%= value %></div>
+<% end %>
+
+<% if signed_in? %>
+  <% if current_user.following?(@node) %>
+    <%= render 'shared/note_form' %>
+  <% end %>
+<% end %>
+</div>
+
+<% flash.each do |key, value| %>
+  <div class = "flash <%= key %>"><%= value %></div>
+<% end %>
+
+<%= render @notes %>
+<%= will_paginate @notes %>
+

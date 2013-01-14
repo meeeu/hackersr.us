@@ -1,0 +1,9 @@
+<h4>Sign up</h4>
+
+<% flash.each do |key, value| %>
+  <div class = "flash <%= key %>"><%= value %></div>
+<% end %>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', users_path %>

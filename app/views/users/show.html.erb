@@ -1,0 +1,47 @@
+<ul class="vcard">
+  <li>
+   <b><%= @user.handle %></b> | <%= @user.name %>
+    <% if @user.following.count == 0 %>
+      is a new User.<br />
+    <% else %>
+      is in 
+      <% if @user.following.count == 1 %>
+        <%= @user.following.count %> Node.<br />
+      <% else %>
+        <%= @user.following.count %> Nodes.<br />
+      <% end %>
+    <% end %>
+  </li>
+
+  <li><b>Notes</b> | <%= @user.notes.count %></li><br />
+</ul>
+
+<% flash.each do |key, value| %>
+  <div class="flash <%= key %>"><%= value %></div>
+<% end %>
+
+<dl class="nice tabs">
+  <dd><a href="#userNotes" class="active"><% if current_user?(@user) %>My Notes<% else %>User Notes<% end %></a></dd>  
+  <% if current_user?(@user) %>  
+   <dd><a href="#recentNotes">Recent Notes</a></dd>
+  <% end %> 
+</dl>
+
+<ul class="nice tabs-content">
+  <li class="active" id="userNotesTab"><%= render @notes %><%= will_paginate @notes %></li>
+  <% if current_user?(@user) %>
+   <li id="recentNotesTab">
+     <% @nodes.each do |node| %>
+       <% unless node.notes.empty? %>
+         <% node.notes.each do |n| %>
+           <% unless current_user.id == n.user_id %>
+             <i>From <%= User.find(params[:id] = n.user_id).handle %></i><br /><%= render n %>
+           <% end %>
+         <% end %>
+       <% end %>
+     <% end %>
+   </li>
+  <% end %>
+</ul>
+
+<br />

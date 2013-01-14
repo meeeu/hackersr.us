@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width" name="viewport"> 
+  <title><%= title %></title>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <%= stylesheet_link_tag 'foundation/stylesheets/foundation' %>
+  <%= stylesheet_link_tag 'foundation/stylesheets/app' %>
+  <!--[if lt IE 8]><%= stylesheet_link_tag 'foundation/stylesheets/ie' %><![endif]-->
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+  
+</head>
+<body>
+  <%= render 'layouts/header' %>
+  <br />
+  <div class="container">
+    <%= yield %>
+  </div>
+  <%= render 'layouts/footer' %>
+  
+  <%= javascript_include_tag 'app' %>
+  <%= javascript_include_tag 'foundation' %>
+</body>
+</html>
